@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&family=Lato:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
 * {
   box-sizing: border-box;
@@ -6,7 +6,7 @@
 
 body {
   margin: 0;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: linear-gradient(#29251c, #2c2306);
@@ -18,46 +18,59 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 3rem 10%;
+  padding: 2rem 5%;
+  flex-wrap: wrap; /* Allow wrapping for small screens */
 }
 
 #main-header #title {
   display: flex;
   gap: 1rem;
   align-items: center;
+  flex: 1 1 auto; /* Allow it to grow and shrink */
 }
 
 #main-header #title img {
-  width: 4rem;
-  height: 4rem;
+  width: 3rem;
+  height: 3rem;
   object-fit: contain;
   border-radius: 50%;
   border: 2px solid #ffc404;
 }
 
 #main-header button {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   font-family: 'Lato', sans-serif;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #ffc404;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#main-header button:hover {
+  color: #ff8c00;
 }
 
 h1 {
   font-family: 'Lato', sans-serif;
   font-weight: 700;
-  font-size: 2rem;
+  font-size: 1.8rem;
   margin: 0;
   color: #ffc404;
-  letter-spacing: 0.2rem;
+  letter-spacing: 0.1rem;
   text-transform: uppercase;
 }
 
 #meals {
   width: 90%;
-  max-width: 70rem;
+  max-width: 100%;
   list-style: none;
   margin: 2rem auto;
   padding: 1rem;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); /* Adjust for smaller screens */
   gap: 1rem;
 }
 
@@ -69,27 +82,20 @@ h1 {
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.3);
 }
 
-.meal-item article {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
 .meal-item img {
   width: 100%;
-  height: 20rem;
+  height: 15rem; /* Reduced height for smaller viewports */
   object-fit: cover;
 }
 
 .meal-item h3 {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: bold;
   margin: 0.75rem 0;
 }
 
 .meal-item-description {
-  margin: 1rem;
+  margin: 0.5rem; /* Reduced margin for better spacing */
 }
 
 .meal-item-price {
@@ -98,165 +104,108 @@ h1 {
   color: #ffc404;
   font-size: 0.9rem;
   font-weight: bold;
-  padding: 0.5rem 2rem;
+  padding: 0.3rem 1rem; /* Adjusted padding */
   margin: 0;
   border-radius: 4px;
 }
 
-.meal-item-actions {
-  margin-bottom: 1.5rem;
+.modal {
+  width: 95%;
+  max-width: 30rem; /* Narrower modal for mobile */
+  padding: 0.5rem; /* Reduced padding */
+  font-size: 0.9rem; /* Slightly smaller font for mobile */
 }
 
-.cart h2 {
-  margin: 1rem 0;
-}
-
-.cart ul {
-  list-style: none;
-  margin: 0.5rem 0;
-  padding: 0;
-}
-
-.modal-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 1rem;
-}
-
-.modal-actions .text-button {
-  color: #1d1a16;
-}
-
-.modal-actions .text-button:hover,
-.modal-actions .text-button:active {
-  color: #312c1d;
-}
-
-.cart-total {
-  display: flex;
-  justify-content: flex-end;
-  margin: 2rem 0;
-  font-size: 1.15rem;
-  font-weight: bold;
-  color: #46443c;
-}
-
-.cart-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 0.5rem 0;
-}
-
-.cart-item p {
-  margin: 0;
-}
-
-.cart-item-actions {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
+/* Modal Backdrop */
+.modal::backdrop {
+  background-color: rgba(0, 0, 0, 0.55);
 }
 
 .cart-item-actions button {
-  cursor: pointer;
-  font-size: 1rem;
-  width: 1.5rem;
-  height: 1.5rem;
-  border-radius: 50%;
-  border: none;
-  background-color: #312c1d;
-  color: #ffc404;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  font-size: 0.9rem;
+  width: 1.3rem;
+  height: 1.3rem;
 }
 
-.cart-item-actions button:hover,
-.cart-item-actions button:active {
-  background-color: #1d1a16;
-  color: #ffab04;
-}
-
-.control {
-  margin: 0.5rem 0;
-  display: flex;
-  flex-direction: column;
-}
-
-.control label {
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-}
-
-.control input {
-  width: 100%;
-  max-width: 20rem;
-  font: inherit;
-  padding: 0.5rem;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-}
-
-.control-row {
-  display: flex;
-  justify-content: flex-start;
-  gap: 1rem;
-}
-
+/* Buttons for forms or actions */
 .button {
   font: inherit;
   cursor: pointer;
   background-color: #ffc404;
   border: 1px solid #ffc404;
   color: #1f1a09;
-  padding: 0.5rem 1.5rem;
+  padding: 0.4rem 1rem;
   border-radius: 4px;
 }
 
-.button:hover,
-.button:active {
+.button:hover {
   background-color: #ffab04;
   border-color: #ffab04;
-  color: #1f1a09;
 }
 
-.text-button {
-  font: inherit;
-  cursor: pointer;
-  background-color: transparent;
-  border: none;
-  color: #ffc404;
-}
-
-.text-button:hover,
-.text-button:active {
-  color: #ffab04;
-}
-
-.modal {
-  background-color: #e4ddd4;
-  border-radius: 6px;
-  border: none;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
-  padding: 1rem;
-  width: 80%;
-  max-width: 40rem;
-  animation: fade-slide-up 0.3s ease-out forwards;
-}
-
-.modal::backdrop {
-  background-color: rgba(0, 0, 0, 0.55);
-}
-
-@keyframes fade-slide-up {
-  from {
-    opacity: 0;
-    transform: translateY(4rem);
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  #main-header {
+    padding: 1.5rem 5%;
   }
 
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  #main-header #title img {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  #meals {
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  }
+
+  .meal-item img {
+    height: 12rem;
+  }
+
+  .modal {
+    font-size: 0.8rem;
+  }
+
+  .cart-item-actions button {
+    font-size: 0.8rem;
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  #main-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  #main-header #title {
+    margin-bottom: 1rem;
+    flex: unset; /* Ensure it doesn’t grow or shrink */
+  }
+
+  h1 {
+    font-size: 1.2rem;
+    text-align: left;
+  }
+
+  #meals {
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  }
+
+  .meal-item img {
+    height: 10rem;
+  }
+
+  .modal {
+    font-size: 0.7rem;
+  }
+
+  .button {
+    padding: 0.3rem 0.8rem;
   }
 }
