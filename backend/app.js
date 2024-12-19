@@ -3,10 +3,30 @@ const fs = require("fs/promises");
 const bodyParser = require("body-parser");
 const express = require("express");
 
+require('dotenv').config();
+
+const { Client } = require('pg');
+
+const client = new Client({
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: process.env.DB_DATABASE,
+  password: process.env.DB_PASSWORD,
+  port: process.env.DB_PORT,
+});
+
+client.connect()
+  .then(() => {
+    console.log('Connected to the PostgreSQL database!');
+  })
+  .catch(err => {
+    console.error('Connection error', err.stack);
+  });
+
 const app = express();
 
 app.use(bodyParser.json());
-app.use(express.static("backend/public"));
+app.use(express.static("public"));
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -15,10 +35,17 @@ app.use((req, res, next) => {
   next();
 });
 
+//GET ROUTE FOR MEALS
 app.get("/meals", async (req, res) => {
-  const meals = await fs.readFile("backend/data/available-meals.json", "utf8");
-  res.json(JSON.parse(meals));
+  try {
+    const result = await client.query('SELECT * FROM meals');
+    res.json(result.rows);
+  } catch (err) {
+    console.error('Error fetching meals:', err);
+    res.status(500).json({ message: 'Failed to fetch meals.' });
+  }
 });
+
 
 app.post("/orders", async (req, res) => {
   const orderData = req.body.order;
