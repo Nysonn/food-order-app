@@ -6,7 +6,7 @@ const express = require("express");
 const app = express();
 
 app.use(bodyParser.json());
-app.use(express.static("backend/public"));
+app.use(express.static("public"));
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -16,13 +16,12 @@ app.use((req, res, next) => {
 });
 
 app.get("/meals", async (req, res) => {
-  const meals = await fs.readFile("backend/data/available-meals.json", "utf8");
+  const meals = await fs.readFile("/backend/data/available-meals.json", "utf8");
   res.json(JSON.parse(meals));
 });
 
 app.post("/orders", async (req, res) => {
   const orderData = req.body.order;
-
   if (
     orderData === null ||
     orderData.items === null ||
@@ -68,4 +67,6 @@ app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
 });
 
-app.listen(3000);
+app.listen(3000, ()=> {
+  console.log("Server is running on port 3000");
+});
